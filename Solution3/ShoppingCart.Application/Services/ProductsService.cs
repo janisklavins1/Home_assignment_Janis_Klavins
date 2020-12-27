@@ -115,13 +115,7 @@ namespace ShoppingCart.Application.Services
          */
 
         }
-        public IQueryable<ProductViewModel> GetProducts(string keyword)
-        {  //Iqueryable and list
 
-            var products = _productsRepo.GetProducts().Where(x=>x.Description.Contains(keyword) || x.Name.Contains(keyword))
-                .ProjectTo<ProductViewModel>(_mapper.ConfigurationProvider);
-            return products;
-        }
         public IQueryable<ProductViewModel> GetProducts(int category)
         {
             var list = from p in _productsRepo.GetProducts().Where(x => x.Category.Id == category)

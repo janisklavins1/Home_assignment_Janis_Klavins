@@ -10,8 +10,6 @@ namespace ShoppingCart.Application.Interfaces
     {
         IQueryable<ProductViewModel> GetProducts();
 
-        IQueryable<ProductViewModel> GetProducts(string keyword);
-
         IQueryable<ProductViewModel> GetProducts(int category);
 
         ProductViewModel GetProduct(Guid id);

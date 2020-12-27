@@ -30,12 +30,10 @@ namespace PresentationWebApp.Controllers
             return View(list);
         }
 
-        [HttpPost]
-        public IActionResult Search(string keyword) //using a form, and the select list must have name attribute = category
+        public IActionResult Search(int category) //using a form, and the select list must have name attribute = category
         {
-            var list = _productsService.GetProducts(keyword).ToList();
-
-            return View("Index", list);
+            var list = _productsService.GetProducts(category);
+            return RedirectToAction("Index", list);
         }
 
 
