@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using PresentationWebApp.Models;
 using ShoppingCart.Application.Interfaces;
 using ShoppingCart.Application.ViewModels;
 
@@ -24,19 +25,26 @@ namespace PresentationWebApp.Controllers
             _env = env;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(int pageNumber = 1, int pageSize = 10)
         {
-            var list = _productsService.GetProducts();           
-            return View(list);
+            var list = _productsService.GetProducts();
+            int count = list.Count();
+            int pagesTotal = count / pageSize;
+            if (pagesTotal%pageSize != 0)
+            {
+                ViewBag.totalPages = pagesTotal+1;//if number == uneven add plus 1 to show remaining prodcuts
+            }
+            else
+            {
+                ViewBag.totalPages = pagesTotal;
+            }
+            
+            int batch = (pageNumber * pageSize) - pageSize;
+
+            return View(list.Skip(batch).Take(pageSize));
         }
 
-        //public IActionResult Index(int pageNumber = 1, int pageSize = 3)
-        //{
-        //    //int ExcludeRecords = (pageNumber * pageSize) - pageSize;
-
-        //    var list = _productsService.GetProducts().Skip(5).Take(5);
-        //    return View(list);
-        //}
+      
 
         [HttpPost]
         public IActionResult Search(string keyword) //using a form, and the select list must have name attribute = category
@@ -58,6 +66,8 @@ namespace PresentationWebApp.Controllers
         [HttpPost]
         public IActionResult ProductCategories(int category)
         {
+            var listOfCategeories = _categoriesService.GetCategories();
+             ViewBag.Categories = listOfCategeories;
 
             var list = _productsService.GetProducts(category).ToList();
             return View("Index", list);

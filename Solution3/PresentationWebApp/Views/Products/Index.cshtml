@@ -1,31 +1,38 @@
 ﻿@model IEnumerable<ShoppingCart.Application.ViewModels.ProductViewModel>
 
-
-@{
-    ViewData["Title"] = "Index";
-}
+@{ ViewData["Title"] = "Index"; }
 
 <h1>Products Catalogue</h1>
 
 <div class="container">
     <div class="row">
 
-        
+
         <div class="col">
             @Html.Partial("SearchPartial")
         </div>
         <div class="col">
-           @Html.Partial("CategoryFilterPartial")
+            @Html.Partial("CategoryFilterPartial")
+
+
+
         </div>
 
     </div>
-    
-
-    
-    
 
 </div>
 
+<nav aria-label="Page navigation example">
+    <ul class="pagination">
+
+        @{ for (int i = 1; i <= ViewBag.totalPages; i++)
+            {
+    <li class="page-item"><a class="page-link" href="/Products?pageNumber=@i">@i</a></li> } 
+            }
+        <li class="page-item"><a class="page-link" href="/Products?pageNumber=6">Next</a></li>
+        <li class="page-item"><a class="page-link" href="#">Next</a></li>
+    </ul>
+</nav>
 
 
 
@@ -33,19 +40,15 @@
 <div class="container">
     <div class="row">
 
-     @Html.Partial("ViewProductsPartial", Model)
+        @Html.Partial("ViewProductsPartial", Model)
+
+    </div>
+    <div class="row">
+
     </div>
 </div>
 
-<nav aria-label="Page navigation example">
-    <ul class="pagination">
-        @for (int i = 1; i <= Model.Count(); i++)
-        {
-            <li class="page-item"><a class="page-link" href="/Products/?pageNumber=@i">@i</a></li>
-        }
 
-    </ul>
-</nav>
 
- 
+
 

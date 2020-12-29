@@ -98,24 +98,15 @@ namespace ShoppingCart.Application.Services
 
             var products = _productsRepo.GetProducts().ProjectTo<ProductViewModel>(_mapper.ConfigurationProvider);
 
-            return products.Skip(5).Take(5);
-            //Domain >> ViewModels
-
-            //to be implemented using AutoMapper
-         /*   var list = from p in _productsRepo.GetProducts()
-                       select new ProductViewModel()
-                       {
-                           Id = p.Id,
-                           Description = p.Description,
-                           Name = p.Name,
-                           Price = p.Price,
-                           Category = new CategoryViewModel() { Id = p.Category.Id, Name = p.Category.Name },
-                           ImageUrl = p.ImageUrl
-                       };
-            return list;
-         */
+            return products;//.Skip(5).Take(5)
+                            
 
         }
+        //public IQueryable<ProductViewModel> CountProducts() 
+        //{
+        //    int count = _productsRepo.GetProducts().ProjectTo<ProductViewModel>(_mapper.ConfigurationProvider);
+        //    return count;
+        //}
         public IQueryable<ProductViewModel> GetProducts(string keyword)
         {  //Iqueryable and list
 
@@ -125,18 +116,24 @@ namespace ShoppingCart.Application.Services
         }
         public IQueryable<ProductViewModel> GetProducts(int category)
         {
-            var list = from p in _productsRepo.GetProducts().Where(x => x.Category.Id == category)
-                       select new ProductViewModel()
-                       {
-                           Id = p.Id,
-                           Description = p.Description,
-                           Name = p.Name,
-                           Price = p.Price,
-                           Category = new CategoryViewModel() { Id = p.Category.Id, Name = p.Category.Name },
-                           ImageUrl = p.ImageUrl
-                       };
+            //var list = from p in _productsRepo.GetProducts().Where(x => x.Category.Id == category)
+            //           select new ProductViewModel()
+            //           {
+            //               Id = p.Id,
+            //               Description = p.Description,
+            //               Name = p.Name,
+            //               Price = p.Price,
+            //               Category = new CategoryViewModel() { Id = p.Category.Id, Name = p.Category.Name },
+            //               ImageUrl = p.ImageUrl
+            //           };
+            var list  = _productsRepo.GetProducts().Where(x => x.Category.Id.Equals(category))
+                .ProjectTo<ProductViewModel>(_mapper.ConfigurationProvider);
+
+
             return list;
         }
+
+        
 
 
 
