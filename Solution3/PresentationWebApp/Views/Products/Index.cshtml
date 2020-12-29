@@ -8,8 +8,21 @@
 <h1>Products Catalogue</h1>
 
 <div class="container">
+    <div class="row">
 
-    @Html.Partial("SearchPartial")
+        
+        <div class="col">
+            @Html.Partial("SearchPartial")
+        </div>
+        <div class="col">
+           @Html.Partial("CategoryFilterPartial")
+        </div>
+
+    </div>
+    
+
+    
+    
 
 </div>
 
@@ -23,6 +36,16 @@
      @Html.Partial("ViewProductsPartial", Model)
     </div>
 </div>
+
+<nav aria-label="Page navigation example">
+    <ul class="pagination">
+        @for (int i = 1; i <= Model.Count(); i++)
+        {
+            <li class="page-item"><a class="page-link" href="/Products/?pageNumber=@i">@i</a></li>
+        }
+
+    </ul>
+</nav>
 
  
 

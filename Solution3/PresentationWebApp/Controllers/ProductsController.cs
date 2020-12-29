@@ -26,9 +26,17 @@ namespace PresentationWebApp.Controllers
 
         public IActionResult Index()
         {
-            var list = _productsService.GetProducts();
+            var list = _productsService.GetProducts();           
             return View(list);
         }
+
+        //public IActionResult Index(int pageNumber = 1, int pageSize = 3)
+        //{
+        //    //int ExcludeRecords = (pageNumber * pageSize) - pageSize;
+
+        //    var list = _productsService.GetProducts().Skip(5).Take(5);
+        //    return View(list);
+        //}
 
         [HttpPost]
         public IActionResult Search(string keyword) //using a form, and the select list must have name attribute = category
@@ -37,6 +45,25 @@ namespace PresentationWebApp.Controllers
 
             return View("Index", list);
         }
+
+        //[HttpPost]
+        //public IActionResult ProductCategories()
+        //{
+        //    var listOfCategeories = _categoriesService.GetCategories();
+        //    ViewBag.Categories = listOfCategeories;
+
+        //    return View();
+        //}
+
+        [HttpPost]
+        public IActionResult ProductCategories(int category)
+        {
+
+            var list = _productsService.GetProducts(category).ToList();
+            return View("Index", list);
+
+        }
+
 
 
         public IActionResult Details(Guid id)
@@ -116,6 +143,8 @@ namespace PresentationWebApp.Controllers
 
             return RedirectToAction("Index");
         }
+
+
 
 
 

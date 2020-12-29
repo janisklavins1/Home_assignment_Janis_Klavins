@@ -23,7 +23,7 @@ namespace ShoppingCart.Domain.Models
 
         public int Quantity { get; set; }
 
-        public double Price { get; set; }
+        //public double Price { get; set; } Not needed for this project
 
 
     }

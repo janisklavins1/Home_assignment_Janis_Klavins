@@ -9,5 +9,7 @@ namespace ShoppingCart.Domain.Interfaces
     public interface ICategoriesRepository
     {
         IQueryable<Category> GetCategories();
+
+        //Category GetCategory(Guid id);//<---
     }
 }

@@ -40,6 +40,7 @@ namespace ShoppingCart.Data.Repositories
             p.Disable = true;
             _context.SaveChanges();
         }
+        
 
 
         public Product GetProduct(Guid id)

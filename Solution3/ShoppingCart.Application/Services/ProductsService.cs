@@ -60,6 +60,7 @@ namespace ShoppingCart.Application.Services
             }
             
         }
+        
 
         public ProductViewModel GetProduct(Guid id)
         {
@@ -97,7 +98,7 @@ namespace ShoppingCart.Application.Services
 
             var products = _productsRepo.GetProducts().ProjectTo<ProductViewModel>(_mapper.ConfigurationProvider);
 
-            return products;
+            return products.Skip(5).Take(5);
             //Domain >> ViewModels
 
             //to be implemented using AutoMapper
@@ -136,6 +137,7 @@ namespace ShoppingCart.Application.Services
                        };
             return list;
         }
+
 
 
 

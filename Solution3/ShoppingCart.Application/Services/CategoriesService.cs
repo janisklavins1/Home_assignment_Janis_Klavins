@@ -1,4 +1,5 @@
-﻿using ShoppingCart.Application.Interfaces;
+﻿using AutoMapper;
+using ShoppingCart.Application.Interfaces;
 using ShoppingCart.Application.ViewModels;
 using ShoppingCart.Domain.Interfaces;
 using System;
@@ -10,7 +11,7 @@ namespace ShoppingCart.Application.Services
 {
     public class CategoriesService : ICategoriesService
     {
-
+        //private IMapper _mapper;
         private ICategoriesRepository _categoriesRepo;
         public CategoriesService(ICategoriesRepository categoriesRepository)
         {
@@ -27,5 +28,6 @@ namespace ShoppingCart.Application.Services
                        };
             return list;
         }
+        
     }
 }

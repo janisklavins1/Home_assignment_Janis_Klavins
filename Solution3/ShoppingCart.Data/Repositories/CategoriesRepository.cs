@@ -17,9 +17,11 @@ namespace ShoppingCart.Data.Repositories
             _context = context;
 
         }
+       
         public IQueryable<Category> GetCategories()
         {
             return _context.Categories;
         }
+        
     }
 }
