@@ -1,17 +1,13 @@
-﻿@*@model IEnumerable<ShoppingCart.Application.ViewModels.CategoryViewModel>*@
+﻿
 
 <form class="form-inline" method="post" action="/Products/ProductCategories">
 
     <select class="form-select" aria-label="Default select example" name="category">
-        @*@foreach (var item in ViewBag.Categories)
+        @foreach (var item in ViewBag.Categories)
         {
             <option value="@item.Id">@item.Name</option>
-        }*@
-        <option selected>All</option>
-        <option value="1">Pizza</option>
-        <option value="2">Drinks</option>
-        <option value="3">Salads</option>
-        <option value="4">Burgers</option>
+        }
+        
     </select>
 
     <button type="submit" class="btn btn-primary mb-2">Filter</button>

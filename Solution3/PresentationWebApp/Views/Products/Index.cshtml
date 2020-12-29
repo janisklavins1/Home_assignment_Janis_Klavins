@@ -12,7 +12,7 @@
             @Html.Partial("SearchPartial")
         </div>
         <div class="col">
-            @Html.Partial("CategoryFilterPartial")
+            @Html.Partial("CategoryFilterPartial",Model)
 
 
 
@@ -27,10 +27,9 @@
 
         @{ for (int i = 1; i <= ViewBag.totalPages; i++)
             {
-    <li class="page-item"><a class="page-link" href="/Products?pageNumber=@i">@i</a></li> } 
+                <li class="page-item"><a class="page-link" href="/Products?pageNumber=@i">@i</a></li> } 
             }
-        <li class="page-item"><a class="page-link" href="/Products?pageNumber=6">Next</a></li>
-        <li class="page-item"><a class="page-link" href="#">Next</a></li>
+        
     </ul>
 </nav>
 

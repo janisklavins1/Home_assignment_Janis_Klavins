@@ -41,6 +41,9 @@ namespace PresentationWebApp.Controllers
             
             int batch = (pageNumber * pageSize) - pageSize;
 
+            var listOfCategeories = _categoriesService.GetCategories();
+            ViewBag.Categories = listOfCategeories;
+
             return View(list.Skip(batch).Take(pageSize));
         }
 
@@ -67,8 +70,7 @@ namespace PresentationWebApp.Controllers
         public IActionResult ProductCategories(int category)
         {
             var listOfCategeories = _categoriesService.GetCategories();
-             ViewBag.Categories = listOfCategeories;
-
+            ViewBag.Categories = listOfCategeories;
             var list = _productsService.GetProducts(category).ToList();
             return View("Index", list);
 
