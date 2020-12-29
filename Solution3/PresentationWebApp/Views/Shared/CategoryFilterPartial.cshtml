@@ -5,10 +5,10 @@
     <select class="form-select" aria-label="Default select example" name="category">
         @foreach (var item in ViewBag.Categories)
         {
-            <option value="@item.Id">@item.Name</option>
-        }
-        
+    <option value="@item.Id">@item.Name</option>}
+
     </select>
 
     <button type="submit" class="btn btn-primary mb-2">Filter</button>
+    <a asp-action="Index" class="text-reset"><p class="fst-italic">Reset</p></a> 
 </form>
