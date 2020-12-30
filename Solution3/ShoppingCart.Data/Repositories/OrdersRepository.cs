@@ -1,4 +1,5 @@
 ﻿using ShoppingCart.Data.Context;
+using ShoppingCart.Domain.Interfaces;
 using ShoppingCart.Domain.Models;
 using System;
 using System.Collections.Generic;
@@ -7,7 +8,7 @@ using System.Text;
 
 namespace ShoppingCart.Data.Repositories
 {
-    public class OrdersRepository
+    public class OrdersRepository : IOrdersRepository
     {
         ShoppingCartDbContext _context;
 
@@ -21,6 +22,25 @@ namespace ShoppingCart.Data.Repositories
         {
             return _context.Orders;
         }
+
+        public Guid AddOrder(Order order)
+        {
+           
+            _context.Orders.Add(order);
+            _context.SaveChanges();
+
+            return order.Id;
+           
+        }
+
+        //public void DeleteOrder(Order order)
+        //{           
+        //    _context.Orders.Remove(order);
+        //    _context.SaveChanges(); //this will save permanently into the db
+        //}
+
+
+
 
 
     }

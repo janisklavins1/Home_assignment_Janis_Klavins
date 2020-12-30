@@ -10,6 +10,6 @@ namespace ShoppingCart.Domain.Interfaces
     {
         IQueryable<Category> GetCategories();
 
-        //Category GetCategory(Guid id);//<---
+        //Category GetCategory(Guid id);
     }
 }

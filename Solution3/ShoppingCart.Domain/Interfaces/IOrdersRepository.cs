@@ -9,7 +9,12 @@ namespace ShoppingCart.Domain.Interfaces
     public interface IOrdersRepository
     {
 
-       IQueryable<Order> GetOrders();
+        IQueryable<Order> GetOrders();
+        //void CheckOut(List<Product> productsInCart);
+
+        Guid AddOrder(Order o);
+
+        //void DeleteOrder(Order o);
 
     }
 }

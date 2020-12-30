@@ -1,4 +1,5 @@
 ﻿using ShoppingCart.Application.ViewModels;
+using ShoppingCart.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,12 @@ namespace ShoppingCart.Application.Interfaces
     {
 
         IQueryable<OrderViewModel> GetOrders();
+
+        //void CheckOut(List<Product> productsInCart);
+
+        void AddOrder(OrderViewModel order);
+
+        //void DeleteOrder(Guid id);
 
     }
 }
