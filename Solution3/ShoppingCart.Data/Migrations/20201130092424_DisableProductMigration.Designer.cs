@@ -5,9 +5,9 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using ShoppingCart.Data.Context;
+using ShoppingCartService.Data.Context;
 
-namespace ShoppingCart.Data.Migrations
+namespace ShoppingCartService.Data.Migrations
 {
     [DbContext(typeof(ShoppingCartDbContext))]
     [Migration("20201130092424_DisableProductMigration")]

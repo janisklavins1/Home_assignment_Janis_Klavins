@@ -6,12 +6,9 @@ using System.Text;
 
 namespace ShoppingCart.Application.Interfaces
 {
-    public interface IOrderDetailsService
+    public interface IShoppingCartService
     {
-
-        IQueryable<OrderDetailsViewModel> GetOrdersDetails();
-
-        void AddOrderDetails(OrderDetailsViewModel orderDetails);
+        IQueryable<ProductViewModel> GetShoppingCart(List<Guid> shoppingCart);
 
     }
 }

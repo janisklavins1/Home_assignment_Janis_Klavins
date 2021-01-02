@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using ShoppingCart.Data.Context;
+using ShoppingCartService.Data.Context;
 
-namespace ShoppingCart.Data.Migrations
+namespace ShoppingCartService.Data.Migrations
 {
     [DbContext(typeof(ShoppingCartDbContext))]
     partial class ShoppingCartDbContextModelSnapshot : ModelSnapshot
