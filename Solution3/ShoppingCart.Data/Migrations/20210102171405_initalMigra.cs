@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ShoppingCart.Data.Migrations
 {
-    public partial class OrderTable : Migration
+    public partial class initalMigra : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

@@ -1,11 +1,11 @@
 ﻿
+
 <form class="form-inline" method="post" action="/Products/ProductCategories">
 
     <select class="form-select" aria-label="Default select example" name="category">
         @foreach (var item in ViewBag.Categories)
         {
-        <option value="@item.Id">@item.Name</option>
-        }
+    <option value="@item.Id">@item.Name</option>}
 
     </select>
 

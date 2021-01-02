@@ -64,28 +64,49 @@ namespace ShoppingCart.Application.Services
 
         public ProductViewModel GetProduct(Guid id)
         {
-            
+            //AutoMapper
 
+
+           
 
             var myProduct = _productsRepo.GetProduct(id);
             var result = _mapper.Map<ProductViewModel>(myProduct);
             return result;
 
 
+         /*  ProductViewModel myModel = new ProductViewModel();
+            myModel.Description = myProduct.Description;
+            myModel.ImageUrl = myProduct.ImageUrl;
+            myModel.Name = myProduct.Name;
+            myModel.Price = myProduct.Price;
+            myModel.Id = myProduct.Id;
+            myModel.Category = new CategoryViewModel()
+            {
+                Id = myProduct.Category.Id,
+                Name = myProduct.Category.Name
+            };
+            return myModel;
+         */
 
         }
 
         public IQueryable<ProductViewModel> GetProducts()
         {
-           
+            //to check whether this works
+            //demonstrate the alternative way with ProjectTo...
+
 
             var products = _productsRepo.GetProducts().ProjectTo<ProductViewModel>(_mapper.ConfigurationProvider);
 
-            return products;
+            return products;//.Skip(5).Take(5)
                             
 
         }
-        
+        //public IQueryable<ProductViewModel> CountProducts() 
+        //{
+        //    int count = _productsRepo.GetProducts().ProjectTo<ProductViewModel>(_mapper.ConfigurationProvider);
+        //    return count;
+        //}
         public IQueryable<ProductViewModel> GetProducts(string keyword)
         {  //Iqueryable and list
 

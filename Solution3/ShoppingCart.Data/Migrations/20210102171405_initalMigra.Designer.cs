@@ -5,13 +5,13 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using ShoppingCartService.Data.Context;
+using ShoppingCart.Data.Context;
 
-namespace ShoppingCartService.Data.Migrations
+namespace ShoppingCart.Data.Migrations
 {
     [DbContext(typeof(ShoppingCartDbContext))]
-    [Migration("20201230134436_OrderTable")]
-    partial class OrderTable
+    [Migration("20210102171405_initalMigra")]
+    partial class initalMigra
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
