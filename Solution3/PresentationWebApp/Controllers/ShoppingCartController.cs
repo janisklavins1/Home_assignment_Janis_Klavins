@@ -18,18 +18,22 @@ namespace PresentationWebApp.Controllers
         }
 
 
-        public IActionResult Index()
+        public IActionResult Index()//Items are being store in cookie
         {
             var cart = SessionHelper.GetObjectFromJson<List<Guid>>(HttpContext.Session, "shoppingCart");
-
+            
+            
             var list = _shoppingCartService.GetShoppingCart(cart);
+            
+            ViewBag.cart = list;
+            int count = 0;
+            list.Count(x => x.Price) + count;
 
-            return View(list);
+            return View();
         }
 
         public IActionResult AddItemToShoppingCart(Guid id)
         {
-            
 
             if (SessionHelper.GetObjectFromJson<List<Guid>>(HttpContext.Session, "shoppingCart") == null)
             {//if you dont get anything from Session object then initialize new cart item of type Guid
@@ -47,7 +51,7 @@ namespace PresentationWebApp.Controllers
 
             }
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Products");//RedirectToAction("Index");
         }
 
         public IActionResult RemoveItem(Guid id)

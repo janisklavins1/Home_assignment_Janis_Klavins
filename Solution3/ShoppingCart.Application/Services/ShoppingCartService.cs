@@ -24,8 +24,8 @@ namespace ShoppingCart.Application.Services
             _productsRepo = productsRepository;
         }
 
-        public IQueryable<ProductViewModel> GetShoppingCart(List<Guid> shoppingCart)//Data type = ProductViewModel
-        {                                                                           //Argument = List of items
+        public IQueryable<ProductViewModel> GetShoppingCart(List<Guid> shoppingCart)//Items are being store in cookie
+        {                                                                           
 
             if (shoppingCart == null)//if no Items return null
             {
@@ -49,5 +49,7 @@ namespace ShoppingCart.Application.Services
             }
 
         }
+
+        
     }
 }
