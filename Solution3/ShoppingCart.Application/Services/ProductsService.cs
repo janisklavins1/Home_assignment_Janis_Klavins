@@ -92,21 +92,14 @@ namespace ShoppingCart.Application.Services
 
         public IQueryable<ProductViewModel> GetProducts()
         {
-            //to check whether this works
-            //demonstrate the alternative way with ProjectTo...
-
-
+            
             var products = _productsRepo.GetProducts().ProjectTo<ProductViewModel>(_mapper.ConfigurationProvider);
 
-            return products;//.Skip(5).Take(5)
+            return products;
                             
 
         }
-        //public IQueryable<ProductViewModel> CountProducts() 
-        //{
-        //    int count = _productsRepo.GetProducts().ProjectTo<ProductViewModel>(_mapper.ConfigurationProvider);
-        //    return count;
-        //}
+        
         public IQueryable<ProductViewModel> GetProducts(string keyword)
         {  //Iqueryable and list
 

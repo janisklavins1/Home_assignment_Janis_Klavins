@@ -27,26 +27,27 @@ namespace ShoppingCart.Application.Services
         public IQueryable<ProductViewModel> GetShoppingCart(List<Guid> shoppingCart)//Items are being store in cookie
         {                                                                           
 
-            if (shoppingCart == null)//if no Items return null
+            if (shoppingCart != null)
             {
-                return null;
-            }
-            else
-            {
-                List<ProductViewModel> tempProducts = new List<ProductViewModel>();//new temp list in order to get add method in productsService
+                List<ProductViewModel> products = new List<ProductViewModel>();//new temp list in order to get add method in productsService
 
                 foreach (Guid id in shoppingCart)
                 {
                     var item = _productsRepo.GetProduct(id);
-                    tempProducts.Add(_mapper.Map<ProductViewModel>(item));//Add((ProductViewModel product)
+                    products.Add(_mapper.Map<ProductViewModel>(item));//Add((ProductViewModel product)
 
                 }
 
-                IQueryable<ProductViewModel> ShoppingCart = tempProducts.AsQueryable();//Converts an IEnumerable to an IQueryable
+                IQueryable<ProductViewModel> ShoppingCart = products.AsQueryable();//Converts an IEnumerable to an IQueryable
 
                 return ShoppingCart;
-
             }
+            else
+            {
+                return null;//if no Items return null
+            }
+
+
 
         }
 

@@ -1,0 +1,87 @@
+﻿@model IEnumerable<ShoppingCart.Application.ViewModels.ProductViewModel>
+
+
+@{ 
+    List<ShoppingCart.Application.ViewModels.ProductViewModel> listForCount = new List<ShoppingCart.Application.ViewModels.ProductViewModel>();
+    listForCount = Model.ToList();
+}
+
+@if (Model.Count() >= 1)
+{
+    <div class="p-3 mb-2 bg-success text-white text-center">There are @Model.Count() products in cart</div>
+}
+
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12 col-md-10 col-md-offset-1">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Quantity</th>
+                        <th class="text-center">Price</th>
+                        <th class="text-center">Total</th>
+                        <th> </th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @foreach (var item in Model.GroupBy(x => x.Id).Select(y => y.First()).ToList())//removes dublicates
+                    {
+                        <tr>
+                            <td class="col-sm-8 col-md-6">
+                                <div class="media">
+                                    <a class="thumbnail pull-left" href="#"> <img class="media-object" src="@item.ImageUrl" style="width: 72px; height: 72px; padding-right: 5px"> </a>
+                                    <div class="media-body">
+                                        <h3 class="">@item.Name</h3>
+                                        <p class="fs-5 fw-light">Category: @item.Category.Name</p> 
+                                        <span>Status: </span><span class="text-success"><strong>In Stock</strong></span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="col-sm-1 col-md-1" style="text-align: center">
+                                <span class="badge bg-warning text-dark">@listForCount.Count(x => x.Id == item.Id)</span>
+                            </td>
+                            <td class="col-sm-1 col-md-1 text-center"><strong>@item.Price</strong></td>
+                            <td class="col-sm-1 col-md-1 text-center"><strong>@(item.Price * @listForCount.Count(x => x.Id == item.Id))</strong></td>
+                            <td class="col-sm-1 col-md-1">
+                                        <a href="ShoppingCart/RemoveItem?id=@item.Id" class="btn btn-danger">
+                                            <span class="glyphicon glyphicon-remove">
+                                            Remove
+                                    </span></a> 
+                            </td>
+                        </tr>
+
+                    }
+
+                    <tr>
+                        <td>   </td>
+                        <td>   </td>
+                        <td>   </td>
+                        <td><h3>Total</h3></td>
+                        <td class="text-right"><h3><strong>@Html.Partial("CalculateShoppingCartPricePartial", Model)</strong></h3></td>
+                    </tr>
+                    <tr>
+                        <td>   </td>
+                        <td>   </td>
+                        <td>   </td>
+                        <td>             
+                            <a href="/Products" class="btn btn-light">
+                                <span class="glyphicon glyphicon-shopping-cart">Continue Shopping</span>
+                            </a>
+                            
+                           
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-success">
+                                Checkout <span class="glyphicon glyphicon-play"></span>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

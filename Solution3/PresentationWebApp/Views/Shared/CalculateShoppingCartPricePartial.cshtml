@@ -1,0 +1,26 @@
+﻿@model IEnumerable<ShoppingCart.Application.ViewModels.ProductViewModel>
+
+@{
+    List<ShoppingCart.Application.ViewModels.ProductViewModel> listForCount = new List<ShoppingCart.Application.ViewModels.ProductViewModel>();
+    double itemPrice = 0;
+    int itemCount = 0;
+    double totalPrice = 0;
+    double price = 0;
+    @if (Model != null)
+    {
+        listForCount = Model.ToList();
+        @foreach (var item in Model.GroupBy(x => x.Id).Select(y => y.First()).ToList())
+        {
+
+            itemCount = listForCount.Count(x => x.Id == item.Id);
+            itemPrice = item.Price;
+            totalPrice = itemCount * itemPrice;
+            price = price + totalPrice;
+
+        }
+
+
+        <p>@price</p>
+
+        }
+    }
