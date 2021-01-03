@@ -11,10 +11,12 @@ namespace PresentationWebApp.Controllers
     public class ShoppingCartController : Controller
     {
         private readonly IShoppingCartService _shoppingCartService;
+        private readonly IProductsService _productsService;
 
-        public ShoppingCartController(IShoppingCartService shoppingCartService)//constr
+        public ShoppingCartController(IShoppingCartService shoppingCartService, IProductsService productsService)//constr
         {
             _shoppingCartService = shoppingCartService;
+            _productsService = productsService;
         }
 
 
@@ -29,7 +31,8 @@ namespace PresentationWebApp.Controllers
 
         public IActionResult AddItemToShoppingCart(Guid id)
         {
-           
+
+            _productsService.UpdateStock(id, 1);
 
             if (SessionHelper.GetObjectFromJson<List<Guid>>(HttpContext.Session, "shoppingCart") == null)
             {//if you dont get anything from Session object then initialize new cart item of type Guid
@@ -49,18 +52,32 @@ namespace PresentationWebApp.Controllers
                 SessionHelper.SetObjectAsJson(HttpContext.Session, "shoppingCart", ShoppingCart);
 
             }
-            ViewBag.count = 0;
+            
             return RedirectToAction("Index", "Products");//RedirectToAction("Index");
         }
 
         public IActionResult RemoveItem(Guid id)
         {
-            List<Guid> ShoppingCart = SessionHelper.GetObjectFromJson<List<Guid>>(HttpContext.Session, "shoppingCart");
-            ShoppingCart.Remove(id);
-            SessionHelper.SetObjectAsJson(HttpContext.Session, "shoppingCart", ShoppingCart);
+            
+            if (id != null)//System.NullReferenceException
+            {
+                _productsService.UpdateStock(id, -1);
+
+                List<Guid> ShoppingCart = SessionHelper.GetObjectFromJson<List<Guid>>(HttpContext.Session, "shoppingCart");
+
+                ShoppingCart.Remove(id);
+                SessionHelper.SetObjectAsJson(HttpContext.Session, "shoppingCart", ShoppingCart);
+            }
+            
+            
 
             return RedirectToAction("Index");
         }
+
+        //public IActionResult UpdateStock()
+        //{ 
+            
+        //}
         
 
         

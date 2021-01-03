@@ -13,8 +13,15 @@ namespace ShoppingCart.Domain.Interfaces
         Product GetProduct(Guid id);
 
         void DeleteProduct(Product p);
+        void DisableProduct(Guid id);
 
         Guid AddProduct(Product p);
+
+        void UpdateStock(Guid id, int amount);//in order to add int amount need to be negative (- -) = +
+
+        
+
+
 
 
     }

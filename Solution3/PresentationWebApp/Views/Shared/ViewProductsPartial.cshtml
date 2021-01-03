@@ -15,7 +15,9 @@
 
             @if (User.IsInRole("Admin"))
             {
-        <a href="/Products/Delete?id=@p.Id" class="btn btn-danger">Delete</a>}
+        @*<a href="/Products/Delete?id=@p.Id" class="btn btn-danger">Delete</a>*@
+        <a href="/Products/Disable?id=@p.Id" class="btn btn-danger">Disable</a>
+        }
 
         </div>
     </div>

@@ -14,7 +14,7 @@
 
 
 <div class="container">
-    <div class="row">
+    <div class="row justify-content-center">
         <div class="col-sm-12 col-md-10 col-md-offset-1">
             <table class="table table-hover">
                 <thead>
@@ -33,7 +33,7 @@
                         <tr>
                             <td class="col-sm-8 col-md-6">
                                 <div class="media">
-                                    <a class="thumbnail pull-left" href="#"> <img class="media-object" src="@item.ImageUrl" style="width: 72px; height: 72px; padding-right: 5px"> </a>
+                                    <a class="thumbnail pull-left" href="#"> <img class="media-object" src="@item.ImageUrl" style="width: 72px; height: 72px; padding-right: 5px; border-radius: 8px;"> </a>
                                     <div class="media-body">
                                         <h3 class="">@item.Name</h3>
                                         <p class="fs-5 fw-light">Category: @item.Category.Name</p> 
@@ -44,8 +44,8 @@
                             <td class="col-sm-1 col-md-1" style="text-align: center">
                                 <span class="badge bg-warning text-dark">@listForCount.Count(x => x.Id == item.Id)</span>
                             </td>
-                            <td class="col-sm-1 col-md-1 text-center"><strong>@item.Price</strong></td>
-                            <td class="col-sm-1 col-md-1 text-center"><strong>@(item.Price * @listForCount.Count(x => x.Id == item.Id))</strong></td>
+                            <td class="col-sm-1 col-md-1 text-center"><strong style="white-space: nowrap; overflow: hidden;">€ @item.Price</strong></td>
+                            <td class="col-sm-1 col-md-1 text-center"><strong style="white-space: nowrap; overflow: hidden;">€ @(item.Price * @listForCount.Count(x => x.Id == item.Id))</strong></td>
                             <td class="col-sm-1 col-md-1">
                                         <a href="ShoppingCart/RemoveItem?id=@item.Id" class="btn btn-danger">
                                             <span class="glyphicon glyphicon-remove">
@@ -69,7 +69,7 @@
                         <td>   </td>
                         <td>             
                             <a href="/Products" class="btn btn-light">
-                                <span class="glyphicon glyphicon-shopping-cart">Continue Shopping</span>
+                                <span class="glyphicon glyphicon-shopping-cart" style="white-space: nowrap; overflow: hidden;">Continue Shopping</span>
                             </a>
                             
                            

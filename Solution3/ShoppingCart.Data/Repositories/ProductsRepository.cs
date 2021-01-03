@@ -36,8 +36,14 @@ namespace ShoppingCart.Data.Repositories
 
         public void DisableProduct(Guid id)
         {
-            var p =GetProduct(id);
+            var p = GetProduct(id);
             p.Disable = true;
+            _context.SaveChanges();
+        }
+        public void UpdateStock(Guid id, int amount)
+        {
+            var p = GetProduct(id);
+            p.Stock = p.Stock - amount;
             _context.SaveChanges();
         }
         
@@ -53,7 +59,9 @@ namespace ShoppingCart.Data.Repositories
         public IQueryable<Product> GetProducts()
         {
             //ShoppingCartDbContext context = new ShoppingCartDbContext();
-            return _context.Products;
+            return _context.Products.Where(x => x.Disable == false);
         }
+
+        
     }
 }

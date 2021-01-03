@@ -60,35 +60,34 @@ namespace ShoppingCart.Application.Services
             }
             
         }
+
+        public void DisableProduct(Guid id)
+        {
+            var product = _productsRepo.GetProduct(id);
+
+            if (product != null)
+            {
+                _productsRepo.DisableProduct(id);
+            }
+        }
+        public void UpdateStock(Guid id, int amount)
+        {
+            var product = _productsRepo.GetProduct(id);
+
+            _productsRepo.UpdateStock(id, amount);
+        }
         
 
         public ProductViewModel GetProduct(Guid id)
         {
             //AutoMapper
 
-
-           
-
             var myProduct = _productsRepo.GetProduct(id);
             var result = _mapper.Map<ProductViewModel>(myProduct);
             return result;
 
-
-         /*  ProductViewModel myModel = new ProductViewModel();
-            myModel.Description = myProduct.Description;
-            myModel.ImageUrl = myProduct.ImageUrl;
-            myModel.Name = myProduct.Name;
-            myModel.Price = myProduct.Price;
-            myModel.Id = myProduct.Id;
-            myModel.Category = new CategoryViewModel()
-            {
-                Id = myProduct.Category.Id,
-                Name = myProduct.Category.Name
-            };
-            return myModel;
-         */
-
         }
+
 
         public IQueryable<ProductViewModel> GetProducts()
         {

@@ -156,6 +156,14 @@ namespace PresentationWebApp.Controllers
             return RedirectToAction("Index");
         }
 
+       
+        public IActionResult Disable(Guid id)
+        {
+           _productsService.DisableProduct(id);
+
+            return RedirectToAction("Index");
+        }
+
 
 
 
