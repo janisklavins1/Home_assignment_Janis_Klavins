@@ -36,8 +36,20 @@
                                     <a class="thumbnail pull-left" href="#"> <img class="media-object" src="@item.ImageUrl" style="width: 72px; height: 72px; padding-right: 5px; border-radius: 8px;"> </a>
                                     <div class="media-body">
                                         <h3 class="">@item.Name</h3>
-                                        <p class="fs-5 fw-light">Category: @item.Category.Name</p> 
-                                        <span>Status: </span><span class="text-success"><strong>In Stock</strong></span>
+                                        <p class="fs-5 fw-light">Category: @item.Category.Name</p>
+                                        <span>Status: </span>@if (item.Stock >= 1)
+                                        {
+                                            <span class="text-success">
+                                                <strong>In stock</strong>
+                                            </span>
+                                        }
+                                        else
+                                        {
+                                            <span class="text-danger">
+                                                <strong>Not in stock</strong>
+                                            </span>
+                                        }
+
                                     </div>
                                 </div>
                             </td>
@@ -75,10 +87,19 @@
                            
                         </td>
                         <td>
-                            <a href="ShoppingCart/CheckOut" class="btn btn-success">
-                                @*?id=@item.Id*@
-                                <span class="glyphicon glyphicon-shopping-cart" style="white-space: nowrap; overflow: hidden;">Check Out</span>
-                            </a>
+                                @if (ViewBag.inStock == true)
+                                {
+                                    <a href="ShoppingCart/CheckOut" class="btn btn-success">
+                                        <span class="glyphicon glyphicon-shopping-cart" style="white-space: nowrap; overflow: hidden;">Check Out</span>
+                                    </a>
+                                }
+                                else
+                                {
+                                    <a class="btn btn-danger">
+                                        <span class="glyphicon glyphicon-shopping-cart" style="white-space: nowrap; overflow: hidden;">Check Out</span>
+                                    </a>
+                                }
+                            
                         </td>
                     </tr>
                 </tbody>

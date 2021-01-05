@@ -28,12 +28,14 @@ namespace ShoppingCart.Application.Services
             _ordersDetailsRepo = orderDetailsRepository;
             _ordersRepo = ordersRepo;
         }
-
+       
         public IQueryable<ProductViewModel> GetShoppingCart(List<Guid> shoppingCart)//Items are being store in cookie
         {
+            
 
             if (shoppingCart != null)//null Exception
             {
+                
                 List<ProductViewModel> products = new List<ProductViewModel>();//new temp list in order to get add method in productsService
                 IQueryable<ProductViewModel> ShoppingCart;
                 foreach (Guid id in shoppingCart)
@@ -76,6 +78,7 @@ namespace ShoppingCart.Application.Services
             ///-----------Adds order details-------------------
             foreach (var item in shoppingList.GroupBy(x => x).Select(y => y.First()).ToList())//removes dublicates
             {
+                _productsRepo.GetProduct(item);
                 int itemCount = shoppingList.Count(x => x == item);
                 Guid productFk = item;//gets each item PK, resets every time when it loops
                 Guid orderFk = orderId;//gets already saved order PK, checks for new order PK, if there is new order it resets
@@ -89,8 +92,11 @@ namespace ShoppingCart.Application.Services
 
 
                 _ordersDetailsRepo.AddOrderDetails(orderDetails);
+                
+                
             }
             ///-----------Adds order details-------------------
+           
 
         }
 

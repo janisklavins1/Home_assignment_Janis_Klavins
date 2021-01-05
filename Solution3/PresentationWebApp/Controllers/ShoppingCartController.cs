@@ -14,15 +14,13 @@ namespace PresentationWebApp.Controllers
     {
         private readonly IShoppingCartService _shoppingCartService;
         private readonly IProductsService _productsService;
-        private readonly IOrdersService _ordersService;
-        private readonly IOrderDetailsService _orderDetailsService;
+        
 
-        public ShoppingCartController(IShoppingCartService shoppingCartService, IProductsService productsService, IOrdersService ordersService, IOrderDetailsService orderDetailsService)
+        public ShoppingCartController(IShoppingCartService shoppingCartService, IProductsService productsService)
         {
             _shoppingCartService = shoppingCartService;
             _productsService = productsService;
-            _ordersService = ordersService;
-            _orderDetailsService = orderDetailsService;
+            
         }
 
 
@@ -34,16 +32,32 @@ namespace PresentationWebApp.Controllers
            
             //Calculates total price
             double itemPrice, totalPrice, cartPrice = 0;
-            int itemCount = 0;
+            int itemCount, itemsStock = 0;
+            bool inStock = true;
             
             try
             {
                 foreach (var item in list.GroupBy(x => x.Id).Select(y => y.First()).ToList())
                 {
+                    
                     itemCount = list.Count(x => x.Id == item.Id);//Gets item count
                     itemPrice = item.Price;//Gets item price
                     totalPrice = itemCount * itemPrice;//Calculates total item cost
                     cartPrice = cartPrice + totalPrice;//Adds to total Cart price
+
+                    
+                    itemsStock = item.Stock - itemCount;
+
+                    if (itemsStock >= 1)
+                    {
+
+                    }
+                    else
+                    {
+                        inStock = false;
+                    }
+                    ViewBag.inStock = inStock;
+
                 }
 
             }
@@ -107,10 +121,22 @@ namespace PresentationWebApp.Controllers
         {
             var cart = SessionHelper.GetObjectFromJson<List<Guid>>(HttpContext.Session, "shoppingCart");
             string userEmail = User.FindFirstValue(ClaimTypes.Name);
+            var list = _shoppingCartService.GetShoppingCart(cart);
 
-            List<Guid> filteredList = new List<Guid>();
-        
-            _shoppingCartService.SaveOrderDetails(cart, userEmail);
+            foreach (var item in list)
+            {
+                if (_productsService.GetProduct(item.Id).Stock >= 1)
+                {
+                    _shoppingCartService.SaveOrderDetails(cart, userEmail);//saves data into db
+                    _productsService.UpdateStock(item.Id, list.Count(x => x == item));//updates stock value in db
+                }
+                else
+                {
+                    return PartialView("DeniedCheckOutPartial");
+                    
+                }
+            }
+            
 
 
             return PartialView("CheckOutPartial");
