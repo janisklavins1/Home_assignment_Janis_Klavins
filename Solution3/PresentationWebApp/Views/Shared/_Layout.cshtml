@@ -6,70 +6,77 @@
     <title>@ViewData["Title"] - PresentationWebApp</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
-    
+    <link href="~/lib/font-awesome/css/all.css" rel="stylesheet" />
+  
+  
+
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">PresentationWebApp</a>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow  mx-auto">
+            <div class="container ">
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <partial name="_LoginPartial" />
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse justify-content-center">
+                    <ul class="navbar-nav text-white bg-dark text-center">
+                        <li class="nav-item mx-4">
+                            <a class="nav-link text-white bg-dark rounded-pill p-3" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                        <li class="nav-item mx-4 ">
+                            <a class="nav-link text-white bg-dark rounded-pill p-3" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                        </li>
+                        <li class="nav-item mx-4 border border-white rounded-pill">
+                            <a class="nav-link text-white bg-dark rounded-pill p-3" asp-area="" asp-controller="Products" asp-action="Index">Product List</a>
                         </li>
 
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Support" asp-action="Contact">Contact Us</a>
+                        <li class="nav-item mx-4">
+                            <a class="nav-link text-white bg-dark rounded-pill p-3" asp-area="" asp-controller="Support" asp-action="Contact">Contact Us</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Products" asp-action="Index">Product List</a>
+                        <li class="nav-item mx-4">
+                            <a class="nav-link text-capitalize text-left" asp-area="" asp-controller="ShoppingCart" asp-action="Index">
+                                <i class="fas fa-shopping-cart fa-2x" style="color: white"></i>
+                            </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-warning text-capitalize text-left" asp-area="" asp-controller="ShoppingCart" asp-action="Index">Shopping cart</a>
+                        <li class="bg-dark mx-4 nav-item dropdown">
+                            <partial name="_LoginPartial" />
                         </li>
+
+
                     </ul>
+
                 </div>
+
             </div>
-        </nav>
+        </nav>   
     </header>
+            <div class="container">
+                <main role="main" class="pb-3">
 
-    <div class="container">
-        <main role="main" class="pb-3">
+                    @if (TempData["feedback"] != null)
+                    {
+        <div class="alert alert-primary" role="alert">
+            @TempData["feedback"]
+        </div>            }
 
-            @if (TempData["feedback"] != null)
-            {
-                <div class="alert alert-primary" role="alert">
-                    @TempData["feedback"]
-                </div>
-            }
-
-            @if (TempData["warning"] != null)
-            {
-                <div class="alert alert-warning" role="alert">
-                    @TempData["warning"]
-                </div>
-            }
+                    @if (TempData["warning"] != null)
+                    {
+        <div class="alert alert-warning" role="alert">
+            @TempData["warning"]
+        </div>            }
 
 
-            @RenderBody()
-        </main>
-    </div>
+        @RenderBody()
+                </main>
+            </div>
 
     <footer class="border-top footer text-muted">
         <div class="container">
             &copy; 2020 - PresentationWebApp - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
-  
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

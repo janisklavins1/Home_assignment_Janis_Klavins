@@ -49,7 +49,7 @@ namespace PresentationWebApp.Controllers
 
       
 
-        [HttpPost]
+        
         public IActionResult Search(string keyword) //using a form, and the select list must have name attribute = category
         {
             var list = _productsService.GetProducts(keyword).ToList();
@@ -57,16 +57,9 @@ namespace PresentationWebApp.Controllers
             return View("Index", list);
         }
 
-        //[HttpPost]
-        //public IActionResult ProductCategories()
-        //{
-        //    var listOfCategeories = _categoriesService.GetCategories();
-        //    ViewBag.Categories = listOfCategeories;
 
-        //    return View();
-        //}
 
-        [HttpPost]
+       
         public IActionResult ProductCategories(int category)
         {
             var listOfCategeories = _categoriesService.GetCategories();
@@ -80,6 +73,9 @@ namespace PresentationWebApp.Controllers
 
         public IActionResult Details(Guid id)
         {
+            var list = _productsService.GetProducts();
+            ViewBag.products = list;
+
             var p = _productsService.GetProduct(id);
             return View( p);
         }

@@ -99,16 +99,25 @@ namespace PresentationWebApp.Controllers
 
         public IActionResult RemoveItem(Guid id)
         {
-            
-            if (id != null)//System.NullReferenceException
+            try
             {
-                //_productsService.UpdateStock(id, -1);
+                if (id != null)//System.NullReferenceException
+                {
+                    //_productsService.UpdateStock(id, -1);
 
-                List<Guid> ShoppingCart = SessionHelper.GetObjectFromJson<List<Guid>>(HttpContext.Session, "shoppingCart");
+                    List<Guid> ShoppingCart = SessionHelper.GetObjectFromJson<List<Guid>>(HttpContext.Session, "shoppingCart");
 
-                ShoppingCart.Remove(id);
-                SessionHelper.SetObjectAsJson(HttpContext.Session, "shoppingCart", ShoppingCart);
+                    ShoppingCart.Remove(id);
+                    SessionHelper.SetObjectAsJson(HttpContext.Session, "shoppingCart", ShoppingCart);
+                }
+
             }
+            catch (Exception)
+            {
+
+                
+            }
+            
             
             
 
@@ -132,14 +141,14 @@ namespace PresentationWebApp.Controllers
                 }
                 else
                 {
-                    return PartialView("DeniedCheckOutPartial");
+                    return View("DeniedCheckOutPartial");
                     
                 }
             }
             
 
 
-            return PartialView("CheckOutPartial");
+            return View("CheckOutPartial");
         }
 
 

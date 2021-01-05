@@ -3,21 +3,21 @@
 
 @foreach (var p in Model)
 {
-<div class="col-4">
-    <div class="card">
-        <img src="@p.ImageUrl" class="card-img-top image" style="width: 100%">
+<div class="col-3">
+    <div class="card" style="height: 100%; width: 100%">
+        <a href="/Products/Details?id=@p.Id">
+            <img src="@p.ImageUrl" class="card-img-top image" style="width: 95%">
+        </a>
         <div class="card-body">
             <h5 class="card-title text-center">@p.Name</h5>
             <p class="card-text text-center">@p.Price</p>
-            <a href="/Products/Details?id=@p.Id" class="btn btn-primary">View Specification</a>
+            <hr />
 
-            <a href="/ShoppingCart/AddItemToShoppingCart?id=@p.Id" class="btn btn-primary">Buy</a>
+            <a href="/ShoppingCart/AddItemToShoppingCart?id=@p.Id" class="btn btn-dark justify-content-center" style="width: 100%">Add to cart</a>
 
             @if (User.IsInRole("Admin"))
-            {
-        @*<a href="/Products/Delete?id=@p.Id" class="btn btn-danger">Delete</a>*@
-        <a href="/Products/Disable?id=@p.Id" class="btn btn-danger">Disable</a>
-        }
+            {@*<a href="/Products/Delete?id=@p.Id" class="btn btn-danger">Delete</a>*@
+                                <a href="/Products/Disable?id=@p.Id" class="btn btn-danger justify-content-center">Disable</a>}
 
         </div>
     </div>

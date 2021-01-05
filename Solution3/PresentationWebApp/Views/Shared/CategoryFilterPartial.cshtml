@@ -2,13 +2,26 @@
 
 <form class="form-inline" method="post" action="/Products/ProductCategories">
 
-    <select class="form-select" aria-label="Default select example" name="category">
-        @foreach (var item in ViewBag.Categories)
-        {
-    <option value="@item.Id">@item.Name</option>}
+    <div class="input-group">
+        <div class="input-group-prepend">
+            <div class="input-group-text">
+                @if (ViewBag.Categories != null)
+                {
+    @foreach (var item in ViewBag.Categories)
+    {
+          
+                    <input type="radio" value="@item.Id" name="category" id="@item.Id">
+                    <label for="@item.Id">@item.Name</label>
+                   
+                    
+    }}
+            </div>
+        </div>
 
-    </select>
-
-    <button type="submit" class="btn btn-primary mb-2">Filter</button>
-    <a asp-action="Index" class="text-reset"><p class="fst-italic">Reset</p></a> 
+    </div>
+    <button type="submit" class="btn btn-dark">Filter</button>
+    <a asp-action="Index" class="text-reset"><p class="fst-italic"><i class="fas fa-sync"></i></p></a>
 </form>
+
+
+
