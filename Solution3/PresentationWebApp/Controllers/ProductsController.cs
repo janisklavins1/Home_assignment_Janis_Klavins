@@ -128,7 +128,7 @@ namespace PresentationWebApp.Controllers
             }
             catch (Exception ex)
             {
-                //log error
+                TempData["warning"] = ex;
                 TempData["warning"] = "Product was not added!";
             }
 
@@ -146,7 +146,7 @@ namespace PresentationWebApp.Controllers
                 _productsService.DeleteProduct(id);
                 TempData["feedback"] = "Product was deleted";
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 //log your error 
 
@@ -156,7 +156,7 @@ namespace PresentationWebApp.Controllers
             return RedirectToAction("Index");
         }
 
-       
+        [Authorize(Roles = "Admin")]
         public IActionResult Disable(Guid id)
         {
            _productsService.DisableProduct(id);

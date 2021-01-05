@@ -94,9 +94,9 @@ namespace ShoppingCart.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("OrderId");
+                    b.HasIndex("OrderFK");
 
-                    b.HasIndex("ProductId");
+                    b.HasIndex("ProductFK");
 
                     b.ToTable("OrderDetails");
                 });
@@ -142,11 +142,11 @@ namespace ShoppingCart.Data.Migrations
                 {
                     b.HasOne("ShoppingCart.Domain.Models.Order", "Order")
                         .WithMany()
-                        .HasForeignKey("OrderId");
+                        .HasForeignKey("OrderFK");
 
                     b.HasOne("ShoppingCart.Domain.Models.Product", "Product")
                         .WithMany()
-                        .HasForeignKey("ProductId");
+                        .HasForeignKey("ProductFK");
                 });
 
             modelBuilder.Entity("ShoppingCart.Domain.Models.Product", b =>

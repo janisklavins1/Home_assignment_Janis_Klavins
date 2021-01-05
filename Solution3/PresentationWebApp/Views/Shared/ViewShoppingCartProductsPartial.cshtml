@@ -61,7 +61,7 @@
                         <td>   </td>
                         <td>   </td>
                         <td><h3>Total</h3></td>
-                        <td class="text-right"><h3><strong>@Html.Partial("CalculateShoppingCartPricePartial", Model)</strong></h3></td>
+                        <td class="text-right"><h3><strong>€ @ViewBag.TotalPrice</strong></h3></td>
                     </tr>
                     <tr>
                         <td>   </td>
@@ -75,9 +75,10 @@
                            
                         </td>
                         <td>
-                            <button type="button" class="btn btn-success">
-                                Checkout <span class="glyphicon glyphicon-play"></span>
-                            </button>
+                            <a href="ShoppingCart/CheckOut" class="btn btn-success">
+                                @*?id=@item.Id*@
+                                <span class="glyphicon glyphicon-shopping-cart" style="white-space: nowrap; overflow: hidden;">Check Out</span>
+                            </a>
                         </td>
                     </tr>
                 </tbody>

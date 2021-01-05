@@ -8,22 +8,22 @@ namespace ShoppingCart.Application.Interfaces
 {
     public interface IProductsService
     {
-        IQueryable<ProductViewModel> GetProducts();
+        //IQueryable<ProductViewModel> GetProducts();
 
-        IQueryable<ProductViewModel> GetProducts(string keyword);
+        //IQueryable<ProductViewModel> GetProducts(string keyword);
 
-        IQueryable<ProductViewModel> GetProducts(int category);
+        //IQueryable<ProductViewModel> GetProducts(int category);
 
-        ProductViewModel GetProduct(Guid id);
+        //ProductViewModel GetProduct(Guid id);
 
         
 
-        void AddProduct(ProductViewModel product);
+        //void AddProduct(ProductViewModel product);
 
-        void DeleteProduct(Guid id);
+        //void DeleteProduct(Guid id);
 
-        void DisableProduct(Guid id);
-        void UpdateStock(Guid id , int amount);
+        //void DisableProduct(Guid id);
+        //void UpdateStock(Guid id , int amount);
         
     }
 }
