@@ -42,7 +42,7 @@
                         <li class="bg-dark mx-4 nav-item dropdown">
                             <partial name="_LoginPartial" />
                         </li>
-
+                        
 
                     </ul>
 
@@ -53,21 +53,9 @@
     </header>
             <div class="container">
                 <main role="main" class="pb-3">
+                    <partial name="FeedBackPartial" />
 
-                    @if (TempData["feedback"] != null)
-                    {
-        <div class="alert alert-primary" role="alert">
-            @TempData["feedback"]
-        </div>            }
-
-                    @if (TempData["warning"] != null)
-                    {
-        <div class="alert alert-warning" role="alert">
-            @TempData["warning"]
-        </div>            }
-
-
-        @RenderBody()
+                    @RenderBody()
                 </main>
             </div>
 

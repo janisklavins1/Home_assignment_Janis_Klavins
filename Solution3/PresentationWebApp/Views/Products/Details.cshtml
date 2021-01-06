@@ -1,51 +1,16 @@
 ﻿@model ShoppingCart.Application.ViewModels.ProductViewModel
 
-@{
-    ViewData["Title"] = "Details";
-}
+@{ ViewData["Title"] = "Details"; }
 
 
-@*<div class="p-3 mb-2 bg-dark text-white text-center">Product Details</div>
+
+
+
+
+
+<h1 class="text-center font-weight-normal">Product Details</h1>
+<hr />
 <div class="container">
-    <div class="row">
-
-        <div class="col-3">
-            <div class="card" style="height: 100%; width: 100%">
-
-                <img src="@Html.DisplayFor(model => model.ImageUrl)" class="card-img-top image" style="width: 95%">
-                <hr />
-                <div class="card-body">
-                    <h5 class="card-title text-center">@Html.DisplayFor(model => model.Name)</h5>
-                    <p class="card-text text-center">@Html.DisplayFor(model => model.Price)</p>
-                    <hr />
-
-                    <a href="/ShoppingCart/AddItemToShoppingCart?id=@Html.DisplayFor(model => model.Id)" class="btn btn-dark justify-content-center" style="width: 100%">Add to cart</a>
-
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            @Html.DisplayFor(model => model.Description)
-        </div>
-
-    </div>
-    
-    <div class="row pt-3">
-        <div class="p-3 mb-2 bg-dark text-white text-center"><a asp-action="Index">Back to Catalog</a></div>
-        
-    </div>
-</div>
-<div>
-    
-      
-        
-*@
-<div class="container">
-    <div class="row">
-        <div class="col-lg-12 bg-dark p-2 text-white mt-2 text-center text-capitalize">
-            Product Details
-        </div>
-    </div>
     <div class="row mt-4">
 
         <div class="col-lg-4 text-center border-right border-secondery">
@@ -65,14 +30,20 @@
             <p>
                 @Html.DisplayFor(model => model.Description)
             </p>
-            <ul>
-                <li> <a href="/ShoppingCart/AddItemToShoppingCart?id=@Html.DisplayFor(model => model.Id)" class="btn btn-success justify-content-center" style="width: 100%">Add to cart</a></li>
-            </ul>
+            <hr />
+                <form action="/ShoppingCart/AddMultipleItems?id=@Html.DisplayFor(model => model.Id)" method="post">
+                    <div class="col-xs-1 font-weight-bold">
+                        <input type="number" value="1" min="0" max="100" name="amount" style="text-align:center; width:50px; border: 2px solid green;"/>
+                        <button type="submit" class="btn btn-outline-success">Add to cart</button>
+                        </div>
+                    </form>
+ 
         </div>
     </div>
     <div class="row pt-3">
         <a asp-action="Index" class="text-decoration-none">
-            <i class="fas fa-arrow-left fa-5x text-decoration-none"></i></a>
+            <i class="fas fa-arrow-left fa-5x text-decoration-none" style="color: black"></i>
+        </a>
 
     </div>
 </div>

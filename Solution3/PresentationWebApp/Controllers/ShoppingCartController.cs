@@ -66,7 +66,7 @@ namespace PresentationWebApp.Controllers
                 
             }
             
-            ViewBag.TotalPrice = cartPrice;
+            ViewBag.TotalPrice = Math.Round(cartPrice, 2);
 
 
             return View(list);
@@ -75,7 +75,7 @@ namespace PresentationWebApp.Controllers
         public IActionResult AddItemToShoppingCart(Guid id)
         {
 
-            //_productsService.UpdateStock(id, 1);
+            
 
             if (SessionHelper.GetObjectFromJson<List<Guid>>(HttpContext.Session, "shoppingCart") == null)
             {//if you dont get anything from Session object then initialize new cart item of type Guid
@@ -94,8 +94,38 @@ namespace PresentationWebApp.Controllers
 
             }
             
-            return RedirectToAction("Index", "Products");//RedirectToAction("Index");
+            return RedirectToAction("Index", "Products");
         }
+
+        public IActionResult AddMultipleItems(Guid id, int amount)
+
+        {
+            if (SessionHelper.GetObjectFromJson<List<Guid>>(HttpContext.Session, "shoppingCart") == null)
+            {
+                List<Guid> ShoppingCart = new List<Guid>();
+                for (int i = 0; i < amount; i++)
+                {
+                    ShoppingCart.Add(id);
+                }
+                
+
+                SessionHelper.SetObjectAsJson(HttpContext.Session, "shoppingCart", ShoppingCart);
+
+            }
+            else
+            {
+                List<Guid> ShoppingCart = SessionHelper.GetObjectFromJson<List<Guid>>(HttpContext.Session, "shoppingCart");
+                for (int i = 0; i < amount; i++)
+                {
+                    ShoppingCart.Add(id);
+                }
+                SessionHelper.SetObjectAsJson(HttpContext.Session, "shoppingCart", ShoppingCart);
+
+            }
+
+            return RedirectToAction("Index", "Products");
+        }
+
 
         public IActionResult RemoveItem(Guid id)
         {
@@ -103,7 +133,7 @@ namespace PresentationWebApp.Controllers
             {
                 if (id != null)//System.NullReferenceException
                 {
-                    //_productsService.UpdateStock(id, -1);
+                    
 
                     List<Guid> ShoppingCart = SessionHelper.GetObjectFromJson<List<Guid>>(HttpContext.Session, "shoppingCart");
 
@@ -117,9 +147,6 @@ namespace PresentationWebApp.Controllers
 
                 
             }
-            
-            
-            
 
             return RedirectToAction("Index");
         }

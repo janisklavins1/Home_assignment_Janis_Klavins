@@ -1,26 +1,26 @@
 ﻿
 
-<form class="form-inline" method="post" action="/Products/ProductCategories">
+<form  method="post" action="/Products/ProductCategories">
 
-    <div class="input-group">
-        <div class="input-group-prepend">
-            <div class="input-group-text">
-                @if (ViewBag.Categories != null)
+    
+        
+            @if (ViewBag.Categories != null)
+            {
+                foreach (var item in ViewBag.Categories)
                 {
-    @foreach (var item in ViewBag.Categories)
-    {
-          
-                    <input type="radio" value="@item.Id" name="category" id="@item.Id">
-                    <label for="@item.Id">@item.Name</label>
-                   
-                    
-    }}
-            </div>
-        </div>
+                    <div class="form-check-inline">
+                        <input class="form-check-input" type="radio" name="category" id="@item.Id" value="@item.Id">
+                        <label class="form-check-label" for="exampleRadios1">
+                            @item.Name
+                        </label>
+                    </div>
+                }
+            }
+                                       
 
-    </div>
+    
     <button type="submit" class="btn btn-dark">Filter</button>
-    <a asp-action="Index" class="text-reset"><p class="fst-italic"><i class="fas fa-sync"></i></p></a>
+    
 </form>
 
 

@@ -2,7 +2,10 @@
 
 
 
-<h1 class="text-center font-weight-normal">Products Catalogue</h1>
+
+
+    <h1 class="text-center font-weight-normal">Products Catalogue</h1>
+
 <hr />
 
 <div class="container">
@@ -10,24 +13,24 @@
 
     <div class="row justify-content-center">
         <div class="col">
-            @Html.Partial("SearchPartial")
+            <partial name="SearchPartial" />
         </div>
         <div class="col">
-            @Html.Partial("CategoryFilterPartial", Model)
+            <partial name="CategoryFilterPartial", model="Model" />
         </div>
     </div>
 
     <div class="row justify-content-center">
-        @Html.Partial("ViewProductsPartial", Model)
+        <partial name="ViewProductsPartial" , model="Model" />
     </div>
 
-    <div class="row justify-content-center">
+    <div class="row justify-content-center pt-4">
         <nav aria-label="Page navigation example">
             <ul class="pagination">
 
                 @{ for (int i = 1; i <= ViewBag.totalPages; i++)
                     {
-        <li class="page-item"><a class="page-link" style="color:black" href="/Products?pageNumber=@i">@i</a></li>
+        <li class="page-item"><a class="page-link bg-dark" style="color: white" href="/Products?pageNumber=@i">@i</a></li>
  } }
 
             </ul>

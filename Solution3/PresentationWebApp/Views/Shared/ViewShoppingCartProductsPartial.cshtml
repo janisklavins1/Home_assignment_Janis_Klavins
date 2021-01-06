@@ -87,19 +87,24 @@
                            
                         </td>
                         <td>
-                                @if (ViewBag.inStock == true)
-                                {
+                            @if (ViewBag.inStock == true)
+                            {
+
+
+                               
                                     <a href="ShoppingCart/CheckOut" class="btn btn-success">
                                         <span class="glyphicon glyphicon-shopping-cart" style="white-space: nowrap; overflow: hidden;">Check Out</span>
                                     </a>
-                                }
-                                else
-                                {
-                                    <a class="btn btn-danger">
-                                        <span class="glyphicon glyphicon-shopping-cart" style="white-space: nowrap; overflow: hidden;">Check Out</span>
-                                    </a>
-                                }
-                            
+                                
+                                
+                            }
+                            else
+                            {
+                                <a class="btn btn-danger">
+                                    <span class="glyphicon glyphicon-shopping-cart" style="white-space: nowrap; overflow: hidden;">Check Out</span>
+                                </a>
+                            }
+
                         </td>
                     </tr>
                 </tbody>

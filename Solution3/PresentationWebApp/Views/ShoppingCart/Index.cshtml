@@ -13,15 +13,16 @@
         @if (Model != null && Model.Count() > 0)
         {
 
-            @Html.Partial("ViewShoppingCartProductsPartial", Model)
+            <partial name="ViewShoppingCartProductsPartial" , model="Model" />
+           
 
         }
         else
         {
-            
+
             <h1 class="p-3 mb-2 bg-warning text-dark text-center text-capitalize justify-content-center">Shopping cart is empty!</h1>
             <a href="Products" class="text-decoration-none">
-                
+
                 <h1 class="alert alert-success" role="alert">
                     <i class="fas fa-store fa-9x fa-align-center"></i>
                     To Products Catalog

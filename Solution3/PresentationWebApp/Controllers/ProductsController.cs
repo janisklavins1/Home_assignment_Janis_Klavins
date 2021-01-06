@@ -30,15 +30,15 @@ namespace PresentationWebApp.Controllers
             var list = _productsService.GetProducts();
             int count = list.Count();
             int pagesTotal = count / pageSize;
-            if (pagesTotal%pageSize != 0)
+            if (pagesTotal % pageSize != 0)
             {
-                ViewBag.totalPages = pagesTotal+1;//if number == uneven add plus 1 to show remaining prodcuts
+                ViewBag.totalPages = pagesTotal + 1;//if number == uneven add plus 1 to show remaining prodcuts
             }
             else
             {
                 ViewBag.totalPages = pagesTotal;
             }
-            
+
             int batch = (pageNumber * pageSize) - pageSize;
 
             var listOfCategeories = _categoriesService.GetCategories();
@@ -160,6 +160,7 @@ namespace PresentationWebApp.Controllers
             return RedirectToAction("Index");
         }
 
+        
 
 
 
