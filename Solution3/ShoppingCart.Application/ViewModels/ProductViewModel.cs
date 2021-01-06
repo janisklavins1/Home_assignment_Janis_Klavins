@@ -21,7 +21,7 @@ namespace ShoppingCart.Application.ViewModels
       
         public CategoryViewModel Category { get; set; }
 
-        [Url]
+       
         public string ImageUrl { get; set; }
         
         public int Stock { get; set; }
