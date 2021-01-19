@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PresentationWebApp.Helpers;
 using ShoppingCart.Application.Interfaces;
+using ShoppingCart.Application.ViewModels;
 
 namespace PresentationWebApp.Controllers
 {
@@ -26,8 +27,9 @@ namespace PresentationWebApp.Controllers
 
         public IActionResult Index()
         {
-            var cart = SessionHelper.GetObjectFromJson<List<Guid>>(HttpContext.Session, "shoppingCart");//Cookie
-            var list = _shoppingCartService.GetShoppingCart(cart);
+            var itemIds = SessionHelper.GetObjectFromJson<List<Guid>>(HttpContext.Session, "shoppingCart");//In order to see all items I need to retrive all the items ID`s from Cookie
+           
+            var list = _shoppingCartService.GetShoppingCart(itemIds);
             ViewBag.cart = list;
            
             //Calculates total price
@@ -83,7 +85,7 @@ namespace PresentationWebApp.Controllers
                 List<Guid> ShoppingCart = new List<Guid>();
                 
                 ShoppingCart.Add(id);
-                SessionHelper.SetObjectAsJson(HttpContext.Session, "shoppingCart", ShoppingCart);
+                SessionHelper.SetObjectAsJson(HttpContext.Session, "shoppingCart", ShoppingCart);//storing in a cookie
 
             }
             else
@@ -142,10 +144,10 @@ namespace PresentationWebApp.Controllers
                 }
 
             }
-            catch (Exception)
+            catch (System.NullReferenceException)
             {
 
-                
+                return RedirectToAction("Index");
             }
 
             return RedirectToAction("Index");

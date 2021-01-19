@@ -18,37 +18,33 @@ namespace ShoppingCart.Application.Services
         private readonly IProductsRepository _productsRepo;
         private IOrderDetailsRepository _ordersDetailsRepo;
         private IOrdersRepository _ordersRepo;
+        private readonly IProductsService _productsService;
 
         public ShoppingCartService(IProductsRepository productsRepository
-           , IMapper mapper, IOrderDetailsRepository orderDetailsRepository, IOrdersRepository ordersRepo
+           , IMapper mapper, IOrderDetailsRepository orderDetailsRepository, IOrdersRepository ordersRepo, IProductsService productsService
             )
         {
             _mapper = mapper;
             _productsRepo = productsRepository;
             _ordersDetailsRepo = orderDetailsRepository;
             _ordersRepo = ordersRepo;
+            _productsService = productsService;
         }
-       
-        public IQueryable<ProductViewModel> GetShoppingCart(List<Guid> shoppingCart)//Items are being store in cookie
+
+        public List<ProductViewModel> GetShoppingCart(List<Guid> itemIds)//Items are being store in cookie
         {
-            
 
-            if (shoppingCart != null)//null Exception
+            if (itemIds != null)//null Exception
             {
-                
-                List<ProductViewModel> products = new List<ProductViewModel>();//new temp list in order to get add method in productsService
-                IQueryable<ProductViewModel> ShoppingCart;
-                foreach (Guid id in shoppingCart)
+
+                List<ProductViewModel> list = new List<ProductViewModel>();//simular to details view!!!
+
+                foreach (var id in itemIds)
                 {
-                    var item = _productsRepo.GetProduct(id);
-                    products.Add(_mapper.Map<ProductViewModel>(item));//Add((ProductViewModel product)
-
+                    var p = _productsService.GetProduct(id);//ProductViewModel GetProduct(Guid id)
+                    list.Add(p);
                 }
-
-                ShoppingCart = products.AsQueryable();//Converts an IEnumerable to an IQueryable
-
-                
-                return ShoppingCart;
+                return list;
             }
             else
             {

@@ -8,7 +8,7 @@ namespace ShoppingCart.Application.Interfaces
 {
     public interface IShoppingCartService
     {
-        IQueryable<ProductViewModel> GetShoppingCart(List<Guid> shoppingCartItems);
+        List<ProductViewModel> GetShoppingCart(List<Guid> itemIds);
         void SaveOrderDetails(List<Guid> shoppingList, string userEmail);
 
     }
